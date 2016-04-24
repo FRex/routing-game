@@ -50,6 +50,23 @@ void Map::generate(unsigned w, unsigned h, unsigned seed)
             t2 |= ETF_CONNECT_SOUTH;
         }
     }
+    for(unsigned x = 0u; x < m_width; ++x)
+    {
+        for(unsigned y = 0u; y < m_height; ++y)
+        {
+            //intentional fallthrough
+            switch(xshifter.get(4u))
+            {
+                case 3:
+                    rawRotateTileRight(x, y);
+                case 2:
+                    rawRotateTileRight(x, y);
+                case 1:
+                    rawRotateTileRight(x, y);
+                    break;
+            }//switch
+        }//for y
+    }//for x
     freshFlood();
 }
 
@@ -60,8 +77,8 @@ void Map::render(Renderer& renderer)
         for(unsigned y = 0u; y < m_height; ++y)
         {
             renderer.renderTile(x, y, getTile(x, y));
-        }
-    }
+        }//for y
+    }//for x
     renderer.renderPowerSource(m_alwaysenergizedx, m_alwaysenergizedy);
 }
 
@@ -80,24 +97,7 @@ void Map::rotateTileRight(unsigned x, unsigned y)
     if(!(x < getWidth() && y < getHeight()))
         return;
 
-    unsigned& t = getTile(x, y);
-    const unsigned oldt = t;
-
-    //clear connections
-    t &= ~ETF_CONNECT_ALL;
-
-    if(oldt & ETF_CONNECT_NORTH)
-        t |= ETF_CONNECT_EAST;
-
-    if(oldt & ETF_CONNECT_EAST)
-        t |= ETF_CONNECT_SOUTH;
-
-    if(oldt & ETF_CONNECT_SOUTH)
-        t |= ETF_CONNECT_WEST;
-
-    if(oldt & ETF_CONNECT_WEST)
-        t |= ETF_CONNECT_NORTH;
-
+    rawRotateTileRight(x, y);
     freshFlood();
 }
 
@@ -154,4 +154,26 @@ unsigned Map::getEnergizedTiles() const
 unsigned Map::getTotalTiles() const
 {
     return m_width * m_height;
+}
+
+void Map::rawRotateTileRight(unsigned x, unsigned y)
+{
+    unsigned& t = getTile(x, y);
+    const unsigned oldt = t;
+
+    //clear connections
+    t &= ~ETF_CONNECT_ALL;
+
+    if(oldt & ETF_CONNECT_NORTH)
+        t |= ETF_CONNECT_EAST;
+
+    if(oldt & ETF_CONNECT_EAST)
+        t |= ETF_CONNECT_SOUTH;
+
+    if(oldt & ETF_CONNECT_SOUTH)
+        t |= ETF_CONNECT_WEST;
+
+    if(oldt & ETF_CONNECT_WEST)
+        t |= ETF_CONNECT_NORTH;
+
 }

@@ -28,6 +28,7 @@ private:
     unsigned& getTile(unsigned x, unsigned y);
     void freshFlood();
     void flood(unsigned x, unsigned y);
+    void rawRotateTileRight(unsigned x, unsigned y);
 
     std::vector<unsigned> m_tiles;
     unsigned m_width;
