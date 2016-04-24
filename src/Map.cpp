@@ -104,7 +104,7 @@ void Map::rotateTileRight(unsigned x, unsigned y)
 unsigned& Map::getTile(unsigned x, unsigned y)
 {
     assert(x < getWidth() && y < getHeight());
-    return m_tiles[x + y * m_height];
+    return m_tiles[x + y * m_width];
 }
 
 void Map::freshFlood()

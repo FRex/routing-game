@@ -54,16 +54,16 @@ void RoutingGame::update()
                     newGame(5u, 5u);
                     break;
                 case sf::Keyboard::F2:
-                    newGame(20u, 20u);
+                    newGame(10u, 15u);
                     break;
                 case sf::Keyboard::F3:
-                    newGame(30u, 30u);
+                    newGame(20u, 30u);
                     break;
                 case sf::Keyboard::F4:
-                    newGame(40u, 40u);
+                    newGame(40u, 60u);
                     break;
                 case sf::Keyboard::F5:
-                    newGame(40u, 50u);
+                    newGame(50u, 100u);
                     break;
                 case sf::Keyboard::W:
                     moveView(m_win, sf::Vector2f(0.f, -75.f));
