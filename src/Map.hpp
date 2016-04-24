@@ -19,11 +19,22 @@ public:
     void render(Renderer& renderer);
     unsigned getWidth() const;
     unsigned getHeight() const;
+    void rotateTileRight(unsigned x, unsigned y);
+
+    unsigned getEnergizedTiles() const;
+    unsigned getTotalTiles() const;
 
 private:
+    unsigned& getTile(unsigned x, unsigned y);
+    void freshFlood();
+    void flood(unsigned x, unsigned y);
+
     std::vector<unsigned> m_tiles;
     unsigned m_width;
     unsigned m_height;
+    unsigned m_alwaysenergizedx;
+    unsigned m_alwaysenergizedy;
+    unsigned m_energized;
 
 };
 

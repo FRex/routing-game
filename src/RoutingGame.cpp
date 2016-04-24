@@ -25,6 +25,14 @@ void RoutingGame::update()
     {
         if(eve.type == sf::Event::Closed)
             m_win.close();
+
+        if(eve.type == sf::Event::MouseButtonPressed && eve.mouseButton.button == sf::Mouse::Left)
+        {
+            const sf::Vector2f mpos = m_win.mapPixelToCoords(sf::Vector2i(eve.mouseButton.x, eve.mouseButton.y));
+            const unsigned x = mpos.x / kTileSize;
+            const unsigned y = mpos.y / kTileSize;
+            m_map.rotateTileRight(x, y);
+        }
     }
 }
 

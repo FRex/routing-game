@@ -21,6 +21,7 @@ public:
     void init(sf::RenderTarget& target);
     void renderTile(unsigned x, unsigned y, unsigned flags);
     void renderCursorShadow(unsigned x, unsigned y);
+    void renderPowerSource(unsigned x, unsigned y);
     void flush();
 
 private:

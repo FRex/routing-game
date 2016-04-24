@@ -59,3 +59,8 @@ void Renderer::renderCursorShadow(unsigned x, unsigned y)
 {
     renderQuad(kTileSize * x, kTileSize * y, kTileSize, kTileSize, kCursorColor);
 }
+
+void Renderer::renderPowerSource(unsigned x, unsigned y)
+{
+    renderQuad(kTileSize * x, kTileSize * y, kTileSize, kTileSize, kPowerSourceColor);
+}
