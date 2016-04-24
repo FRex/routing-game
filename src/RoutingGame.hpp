@@ -22,10 +22,12 @@ private:
     void update();
     void draw();
     void setTitle();
+    void newGame(unsigned w, unsigned h);
 
     sf::RenderWindow m_win;
     Renderer m_renderer;
     Map m_map;
+    bool m_won;
 
 };
 

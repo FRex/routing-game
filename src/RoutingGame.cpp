@@ -7,7 +7,7 @@ RoutingGame::RoutingGame()
 {
     m_win.create(sf::VideoMode(640u, 480u), "game");
     m_renderer.init(m_win);
-    m_map.generate(6u, 6u, (unsigned)std::time(NULL));
+    newGame(10u, 10u);
     setTitle();
 }
 
@@ -28,13 +28,37 @@ void RoutingGame::update()
         if(eve.type == sf::Event::Closed)
             m_win.close();
 
-        if(eve.type == sf::Event::MouseButtonPressed && eve.mouseButton.button == sf::Mouse::Left)
+        if(!m_won && eve.type == sf::Event::MouseButtonPressed && eve.mouseButton.button == sf::Mouse::Left)
         {
             const sf::Vector2f mpos = m_win.mapPixelToCoords(sf::Vector2i(eve.mouseButton.x, eve.mouseButton.y));
             const unsigned x = mpos.x / kTileSize;
             const unsigned y = mpos.y / kTileSize;
             m_map.rotateTileRight(x, y);
+            if(m_map.getEnergizedTiles() == m_map.getTotalTiles())
+                m_won = true;
+
             setTitle();
+        }
+        if(eve.type == sf::Event::KeyPressed)
+        {
+            switch(eve.key.code)
+            {
+                case sf::Keyboard::F1:
+                    newGame(5u, 5u);
+                    break;
+                case sf::Keyboard::F2:
+                    newGame(20u, 20u);
+                    break;
+                case sf::Keyboard::F3:
+                    newGame(30u, 30u);
+                    break;
+                case sf::Keyboard::F4:
+                    newGame(40u, 40u);
+                    break;
+                case sf::Keyboard::F5:
+                    newGame(40u, 50u);
+                    break;
+            }//switch eve key code
         }
     }
 }
@@ -58,6 +82,17 @@ void RoutingGame::draw()
 void RoutingGame::setTitle()
 {
     char buff[128];
-    std::sprintf(buff, "Routing Game: %u/%u", m_map.getEnergizedTiles(), m_map.getTotalTiles());
+    std::sprintf(buff, "Routing Game: %u/%u %s",
+            m_map.getEnergizedTiles(),
+            m_map.getTotalTiles(),
+            m_won?"(solved)":""
+            );
+
     m_win.setTitle(sf::String(buff));
+}
+
+void RoutingGame::newGame(unsigned w, unsigned h)
+{
+    m_won = false;
+    m_map.generate(w, h, static_cast<unsigned>(time(NULL)));
 }

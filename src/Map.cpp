@@ -15,8 +15,8 @@ void Map::generate(unsigned w, unsigned h, unsigned seed)
     m_height = h;
 
     XorShifter xshifter(seed);
-    m_alwaysenergizedx = xshifter.get(m_width);
-    m_alwaysenergizedy = xshifter.get(m_height);
+    m_alwaysenergizedx = xshifter.get(w);
+    m_alwaysenergizedy = xshifter.get(h);
 
     std::vector<sf::Vector2u> con = kruskal(w, h, xshifter);
     for(unsigned i = 0u; i < con.size(); ++i)
