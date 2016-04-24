@@ -5,7 +5,7 @@
 
 void Map::generate(unsigned w, unsigned h)
 {
-    m_tiles.assign(w * h, ETF_CONNECT_NORTH);
+    m_tiles.assign(w * h, 0u);
     m_width = w;
     m_height = h;
 

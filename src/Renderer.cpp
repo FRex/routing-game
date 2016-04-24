@@ -17,7 +17,7 @@ void Renderer::renderTile(unsigned x, unsigned y, unsigned flags)
     const unsigned backcol = (flags & ETF_ENERGIZED)?kBackgroundColorEnergized:kBackgroundColor;
     const unsigned wirecol = (flags & ETF_ENERGIZED)?kWireColorEnergized:kWireColor;
 
-    renderQuad(fx, fy, ts, ts, backcol);
+    renderQuad(fx, fy, ts - 1.f, ts - 1.f, backcol);
     if(flags & ETF_CONNECT_NORTH)
         renderQuad(fx + off, fy, ws, ws + off, wirecol);
 

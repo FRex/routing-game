@@ -4,9 +4,10 @@
 
 RoutingGame::RoutingGame()
 {
-    m_win.create(sf::VideoMode(640u, 480u), "Routing Game");
+    m_win.create(sf::VideoMode(640u, 480u), "game");
     m_renderer.init(m_win);
     m_map.generate(10u, 10u);
+    setTitle();
 }
 
 void RoutingGame::run()
