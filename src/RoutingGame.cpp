@@ -7,7 +7,7 @@ RoutingGame::RoutingGame()
 {
     m_win.create(sf::VideoMode(640u, 480u), "game");
     m_renderer.init(m_win);
-    newGame(10u, 10u);
+    newGame(5u, 5u);
     setTitle();
 }
 
