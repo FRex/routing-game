@@ -32,6 +32,14 @@ void RoutingGame::draw()
 {
     m_win.clear();
     m_map.render(m_renderer);
+
+    //cursor shadow
+    const sf::Vector2f mpos = m_win.mapPixelToCoords(sf::Mouse::getPosition(m_win));
+    const unsigned x = mpos.x / kTileSize;
+    const unsigned y = mpos.y / kTileSize;
+    if(x < m_map.getWidth() && y < m_map.getHeight())
+        m_renderer.renderCursorShadow(x, y);
+
     m_renderer.flush();
     m_win.display();
 }

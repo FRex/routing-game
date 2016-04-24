@@ -18,3 +18,13 @@ void Map::render(Renderer& renderer)
         }
     }
 }
+
+unsigned Map::getWidth() const
+{
+    return m_width;
+}
+
+unsigned Map::getHeight() const
+{
+    return m_height;
+}

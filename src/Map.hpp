@@ -17,6 +17,8 @@ class Map
 public:
     void generate(unsigned w, unsigned h);
     void render(Renderer& renderer);
+    unsigned getWidth() const;
+    unsigned getHeight() const;
 
 private:
     std::vector<unsigned> m_tiles;

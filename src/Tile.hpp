@@ -26,6 +26,7 @@ const unsigned kBackgroundColor = 0x5f5f5fff;
 const unsigned kBackgroundColorEnergized = 0x9f9f9fff;
 const unsigned kWireColor = 0x7f0000ff;
 const unsigned kWireColorEnergized = 0x007f00ff;
+const unsigned kCursorColor = 0x7f7f7f7f;
 
 #endif	/* TILE_HPP */
 

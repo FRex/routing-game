@@ -54,3 +54,8 @@ void Renderer::flush()
     m_target->draw(&m_vertices[0], m_vertices.size(), sf::Quads);
     m_vertices.clear();
 }
+
+void Renderer::renderCursorShadow(unsigned x, unsigned y)
+{
+    renderQuad(kTileSize * x, kTileSize * y, kTileSize, kTileSize, kCursorColor);
+}
