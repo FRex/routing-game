@@ -10,6 +10,7 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Renderer.hpp"
+#include "Map.hpp"
 
 class RoutingGame
 {
@@ -23,6 +24,7 @@ private:
 
     sf::RenderWindow m_win;
     Renderer m_renderer;
+    Map m_map;
 
 };
 

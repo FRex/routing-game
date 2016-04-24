@@ -46,10 +46,11 @@ void Renderer::renderQuad(float x, float y, float w, float h, unsigned c)
     }
 }
 
-void Renderer::draw()
+void Renderer::flush()
 {
     if(m_vertices.empty())
         return;
 
     m_target->draw(&m_vertices[0], m_vertices.size(), sf::Quads);
+    m_vertices.clear();
 }

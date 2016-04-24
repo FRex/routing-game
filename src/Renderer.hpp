@@ -20,7 +20,7 @@ class Renderer
 public:
     void init(sf::RenderTarget& target);
     void renderTile(unsigned x, unsigned y, unsigned flags);
-    void draw();
+    void flush();
 
 private:
     void renderQuad(float x, float y, float w, float h, unsigned c);
