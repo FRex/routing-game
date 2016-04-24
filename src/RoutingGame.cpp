@@ -32,6 +32,7 @@ void RoutingGame::update()
             const unsigned x = mpos.x / kTileSize;
             const unsigned y = mpos.y / kTileSize;
             m_map.rotateTileRight(x, y);
+            setTitle();
         }
     }
 }
@@ -50,4 +51,11 @@ void RoutingGame::draw()
 
     m_renderer.flush();
     m_win.display();
+}
+
+void RoutingGame::setTitle()
+{
+    char buff[128];
+    std::sprintf(buff, "Routing Game: %u/%u", m_map.getEnergizedTiles(), m_map.getTotalTiles());
+    m_win.setTitle(sf::String(buff));
 }

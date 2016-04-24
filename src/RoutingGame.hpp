@@ -21,6 +21,7 @@ public:
 private:
     void update();
     void draw();
+    void setTitle();
 
     sf::RenderWindow m_win;
     Renderer m_renderer;
