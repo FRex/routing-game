@@ -120,5 +120,8 @@ void RoutingGame::newGame(unsigned w, unsigned h)
 {
     m_won = false;
     m_map.generate(w, h, static_cast<unsigned>(std::time(NULL)));
+    sf::View v = m_win.getView();
+    v.setCenter(v.getSize() / 2.f);
+    m_win.setView(v);
     setTitle();
 }
