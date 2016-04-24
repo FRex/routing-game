@@ -1,17 +1,55 @@
 #include "Map.hpp"
 #include "Renderer.hpp"
 #include "Tile.hpp"
+#include "XorShifter.hpp"
+#include "kruskal.hpp"
 #include <cassert>
 
-void Map::generate(unsigned w, unsigned h)
+void Map::generate(unsigned w, unsigned h, unsigned seed)
 {
+    if(w < 5u || h < 5u || seed == 0u)
+        return;
+
     m_tiles.assign(w * h, 0u);
     m_width = w;
     m_height = h;
 
-    m_alwaysenergizedx = 2u;
-    m_alwaysenergizedy = 2u;
+    XorShifter xshifter(seed);
+    m_alwaysenergizedx = xshifter.get(m_width);
+    m_alwaysenergizedy = xshifter.get(m_height);
 
+    std::vector<sf::Vector2u> con = kruskal(w, h, xshifter);
+    for(unsigned i = 0u; i < con.size(); ++i)
+    {
+        unsigned& t1 = m_tiles[con[i].x];
+        unsigned& t2 = m_tiles[con[i].y];
+
+        const unsigned x1 = con[i].x % w;
+        const unsigned y1 = con[i].x / w;
+        const unsigned x2 = con[i].y % w;
+        const unsigned y2 = con[i].y / w;
+
+        if(x1 < x2)
+        {
+            t1 |= ETF_CONNECT_EAST;
+            t2 |= ETF_CONNECT_WEST;
+        }
+        if(x2 < x1)
+        {
+            t1 |= ETF_CONNECT_WEST;
+            t2 |= ETF_CONNECT_EAST;
+        }
+        if(y1 < y2)
+        {
+            t1 |= ETF_CONNECT_SOUTH;
+            t2 |= ETF_CONNECT_NORTH;
+        }
+        if(y2 < y1)
+        {
+            t1 |= ETF_CONNECT_NORTH;
+            t2 |= ETF_CONNECT_SOUTH;
+        }
+    }
     freshFlood();
 }
 

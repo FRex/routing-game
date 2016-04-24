@@ -1,12 +1,13 @@
 #include "RoutingGame.hpp"
 #include <SFML/Graphics.hpp>
 #include "Tile.hpp"
+#include <ctime>
 
 RoutingGame::RoutingGame()
 {
     m_win.create(sf::VideoMode(640u, 480u), "game");
     m_renderer.init(m_win);
-    m_map.generate(10u, 10u);
+    m_map.generate(6u, 6u, (unsigned)std::time(NULL));
     setTitle();
 }
 

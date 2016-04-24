@@ -15,7 +15,7 @@ class Renderer;
 class Map
 {
 public:
-    void generate(unsigned w, unsigned h);
+    void generate(unsigned w, unsigned h, unsigned seed);
     void render(Renderer& renderer);
     unsigned getWidth() const;
     unsigned getHeight() const;
