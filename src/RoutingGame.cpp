@@ -20,6 +20,13 @@ void RoutingGame::run()
     }
 }
 
+static void moveView(sf::RenderTarget& t, sf::Vector2f m)
+{
+    sf::View v = t.getView();
+    v.move(m);
+    t.setView(v);
+}
+
 void RoutingGame::update()
 {
     sf::Event eve;
@@ -58,9 +65,27 @@ void RoutingGame::update()
                 case sf::Keyboard::F5:
                     newGame(40u, 50u);
                     break;
+                case sf::Keyboard::W:
+                    moveView(m_win, sf::Vector2f(0.f, -75.f));
+                    break;
+                case sf::Keyboard::S:
+                    moveView(m_win, sf::Vector2f(0.f, 75.f));
+                    break;
+                case sf::Keyboard::A:
+                    moveView(m_win, sf::Vector2f(-75.f, 0.f));
+                    break;
+                case sf::Keyboard::D:
+                    moveView(m_win, sf::Vector2f(75.f, 0.f));
+                    break;
             }//switch eve key code
         }
-    }
+        if(eve.type == sf::Event::Resized)
+        {
+            sf::View v = m_win.getView();
+            v.setSize(sf::Vector2f(eve.size.width, eve.size.height));
+            m_win.setView(v);
+        }
+    }//while win poll event eve
 }
 
 void RoutingGame::draw()
@@ -94,5 +119,6 @@ void RoutingGame::setTitle()
 void RoutingGame::newGame(unsigned w, unsigned h)
 {
     m_won = false;
-    m_map.generate(w, h, static_cast<unsigned>(time(NULL)));
+    m_map.generate(w, h, static_cast<unsigned>(std::time(NULL)));
+    setTitle();
 }
