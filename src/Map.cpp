@@ -51,24 +51,8 @@ void Map::generate(unsigned w, unsigned h, unsigned seed)
             t2 |= ETF_CONNECT_SOUTH;
         }
     }
-    for(unsigned x = 0u; x < m_width; ++x)
-    {
-        for(unsigned y = 0u; y < m_height; ++y)
-        {
-            //intentional fallthrough
-            switch(xshifter.get(4u))
-            {
-                case 3:
-                    rawRotateTileRight(x, y);
-                case 2:
-                    rawRotateTileRight(x, y);
-                case 1:
-                    rawRotateTileRight(x, y);
-                    break;
-            }//switch
-        }//for y
-    }//for x
-    freshFlood();
+
+    randomlyRotate(seed);
 }
 
 void Map::render(Renderer& renderer)
@@ -182,4 +166,27 @@ void Map::rawRotateTileRight(unsigned x, unsigned y)
     if(oldt & ETF_CONNECT_WEST)
         t |= ETF_CONNECT_NORTH;
 
+}
+
+void Map::randomlyRotate(unsigned seed)
+{
+    XorShifter xshifter(seed);
+    for(unsigned x = 0u; x < m_width; ++x)
+    {
+        for(unsigned y = 0u; y < m_height; ++y)
+        {
+            //intentional fallthrough
+            switch(xshifter.get(4u))
+            {
+                case 3:
+                    rawRotateTileRight(x, y);
+                case 2:
+                    rawRotateTileRight(x, y);
+                case 1:
+                    rawRotateTileRight(x, y);
+                    break;
+            }//switch
+        }//for y
+    }//for x
+    freshFlood();
 }

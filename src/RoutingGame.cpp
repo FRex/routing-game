@@ -77,6 +77,13 @@ void RoutingGame::update()
                 case sf::Keyboard::D:
                     moveView(m_win, sf::Vector2f(75.f, 0.f));
                     break;
+                case sf::Keyboard::Space:
+                    if(!m_won)
+                    {
+                        m_map.randomlyRotate(static_cast<unsigned>(std::time(NULL)));
+                        setTitle();
+                    }
+                    break;
             }//switch eve key code
         }
         if(eve.type == sf::Event::Resized)

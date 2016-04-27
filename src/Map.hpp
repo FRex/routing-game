@@ -26,6 +26,8 @@ public:
 
     unsigned getSeed() const;
 
+    void randomlyRotate(unsigned seed);
+
 private:
     unsigned& getTile(unsigned x, unsigned y);
     void freshFlood();
