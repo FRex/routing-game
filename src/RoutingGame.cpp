@@ -107,7 +107,8 @@ void RoutingGame::draw()
 void RoutingGame::setTitle()
 {
     char buff[128];
-    std::sprintf(buff, "Routing Game: %u/%u %s",
+    std::sprintf(buff, "Routing Game: 0x%x %u/%u %s",
+            m_map.getSeed(),
             m_map.getEnergizedTiles(),
             m_map.getTotalTiles(),
             m_won?"(solved)":""

@@ -10,6 +10,7 @@ void Map::generate(unsigned w, unsigned h, unsigned seed)
     if(w < 5u || h < 5u || seed == 0u)
         return;
 
+    m_seed = seed;
     m_tiles.assign(w * h, 0u);
     m_width = w;
     m_height = h;
@@ -154,6 +155,11 @@ unsigned Map::getEnergizedTiles() const
 unsigned Map::getTotalTiles() const
 {
     return m_width * m_height;
+}
+
+unsigned Map::getSeed() const
+{
+    return m_seed;
 }
 
 void Map::rawRotateTileRight(unsigned x, unsigned y)

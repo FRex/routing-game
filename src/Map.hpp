@@ -24,6 +24,8 @@ public:
     unsigned getEnergizedTiles() const;
     unsigned getTotalTiles() const;
 
+    unsigned getSeed() const;
+
 private:
     unsigned& getTile(unsigned x, unsigned y);
     void freshFlood();
@@ -36,6 +38,7 @@ private:
     unsigned m_alwaysenergizedx;
     unsigned m_alwaysenergizedy;
     unsigned m_energized;
+    unsigned m_seed;
 
 };
 
